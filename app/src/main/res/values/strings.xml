@@ -8,10 +8,10 @@
     <string name="item_price">Item`s price</string>
     <string name="supplier_name">Supplier`s name</string>
     <string name="supplier_email">Supplier`s email</string>
-    <string name="hint_name">Enter here the item`s name</string>
-    <string name="hint_price">Enter here the item`s price</string>
-    <string name="hint_supplier_name">Enter here the supplier`s name</string>
-    <string name="hint_supplier_email">Enter here the supplier`s email</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_price">Price</string>
+    <string name="hint_supplier_name">Supplier`s name</string>
+    <string name="hint_supplier_email">supplier@email.com</string>
     <string name="minus">minus</string>
     <string name="plus">plus</string>
     <string name="currency">£</string>
