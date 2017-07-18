@@ -13,8 +13,8 @@
         <ImageView
             android:id="@+id/product_picture"
             android:layout_width="wrap_content"
-            android:layout_height="263dp"
-            android:src="@drawable/add_an_image">
+            android:layout_height="242dp"
+            android:src="@drawable/blank">
 
         </ImageView>
 
@@ -36,7 +36,7 @@
         android:weightSum="2">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="125dp"
             android:layout_height="170dp"
             android:orientation="vertical"
             android:weightSum="1">
@@ -125,27 +125,20 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_supplier_email"
                 android:inputType="textEmailAddress" />
-
-
         </LinearLayout>
-
     </LinearLayout>
-
-    <Button
-        android:id="@+id/button_order"
-        style="@style/orderButton"
-        android:onClick="order"
-        android:text="@string/orderMore" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="horizontal">
+        android:layout_height="62dp"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:weightSum="1">
 
         <Button
             android:id="@+id/button_minus"
-            android:layout_height="wrap_content"
-            android:layout_weight="wrap_content"
+            android:layout_height="40dp"
+            android:layout_width="40dp"
             android:onClick="decrement"
             android:text="@string/minus" />
 
@@ -157,10 +150,17 @@
 
         <Button
             android:id="@+id/button_plus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:onClick="increment"
             android:text="@string/plus" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/button_order"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="order"
+        android:text="@string/order" />
 
 </LinearLayout>

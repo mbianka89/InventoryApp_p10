@@ -12,7 +12,8 @@
     <string name="hint_price">Price</string>
     <string name="hint_supplier_name">Supplier`s name</string>
     <string name="hint_supplier_email">supplier@email.com</string>
-    <string name="minus">minus</string>
-    <string name="plus">plus</string>
+    <string name="minus"> - </string>
+    <string name="plus"> + </string>
     <string name="currency">£</string>
+    <string name="order">Order more</string>
 </resources>
