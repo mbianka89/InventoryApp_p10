@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/product_picture"
+            android:layout_width="wrap_content"
+            android:layout_height="250dp"
+            android:src="@drawable/add_an_image"></ImageView>
+
+        <TextView
+            android:id="@+id/add_photo_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_image_tv"
+            android:textSize="20sp"
+            android:layout_gravity="center"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="@string/item_name" />
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="@string/item_price" />
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="@string/supplier_name" />
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="@string/supplier_email" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/edit_product_name"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:hint="@string/hint_name"
+                android:inputType="textCapWords" />
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/edit_product_price"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:hint="@string/hint_price"
+                    android:inputType="numberDecimal" />
+
+                <TextView
+                    style="@style/TextCurrency"
+                    android:text="@string/currency" />
+
+            </RelativeLayout>
+
+            <EditText
+                android:id="@+id/supplier_name"
+                style="@style/EditText"
+                android:hint="@string/hintSupplierName"
+                android:inputType="textCapWords" />
+
+            <EditText
+                android:id="@+id/supplier_email"
+                style="@style/EditText"
+                android:hint="@string/hintSupplierEmail"
+                android:inputType="textEmailAddress" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button_minus"
+            android:onClick="decrement"
+            android:text="@string/minus" />
+
+        <TextView
+            android:id="@+id/edit_quantity_text_view"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:hint="0" />
+
+        <Button
+            android:id="@+id/button_plus"
+            android:onClick="increment"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="@string/plus" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button_order"
+        style="@style/orderButton"
+        android:onClick="order"
+        android:text="@string/orderMore" />
+
+</LinearLayout>

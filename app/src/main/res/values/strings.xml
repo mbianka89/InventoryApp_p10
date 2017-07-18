@@ -3,4 +3,12 @@
     <string name="action_settings">Settings</string>
     <string name="empty_view_text">"Your inventory is empty at the moment.\n
         Start adding items to it with the + button!"</string>
+    <string name="add_image_tv">Click here to insert image!</string>
+    <string name="item_name">Item`s name</string>
+    <string name="item_price">Item`s price</string>
+    <string name="supplier_name">Supplier`s name</string>
+    <string name="supplier_email">Supplier`s email</string>
+    <string name="hint_name">Enter here the item`s name</string>
+    <string name="hint_price">Enter here the item`s price</string>
+    <string name="minus">minus</string>
 </resources>
