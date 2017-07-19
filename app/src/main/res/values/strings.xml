@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Bianka`s Inventory App</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_dummy">Insert dummy data</string>
+    <string name="action_delete">Delete all data</string>
     <string name="empty_view_text">"Your inventory is empty at the moment.\n
         Start adding items to it with the + button!"</string>
     <string name="add_image_tv">Click here to insert image!</string>

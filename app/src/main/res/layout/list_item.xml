@@ -30,7 +30,8 @@
             android:id="@+id/list_item_product_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="169£" />
+            android:text="169£"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/list_item_product_quantity"
