@@ -12,9 +12,9 @@
         android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/product_picture"
+            android:id="@+id/item_image"
             android:layout_width="wrap_content"
-            android:layout_height="242dp"
+            android:layout_height="204dp"
             android:src="@drawable/blank">
 
         </ImageView>
@@ -32,7 +32,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="0.23"
         android:orientation="horizontal"
         android:weightSum="2">
 
@@ -84,7 +84,7 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/edit_product_name"
+                android:id="@+id/edit_item_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_name"
@@ -95,7 +95,7 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/edit_product_price"
+                    android:id="@+id/edit_item_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_price"
@@ -106,10 +106,10 @@
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
                     android:text="@string/currency"
-                    android:layout_alignBaseline="@+id/edit_product_price"
-                    android:layout_alignBottom="@+id/edit_product_price"
-                    android:layout_toRightOf="@+id/edit_product_price"
-                    android:layout_toEndOf="@+id/edit_product_price" />
+                    android:layout_alignBaseline="@+id/edit_item_price"
+                    android:layout_alignBottom="@+id/edit_item_price"
+                    android:layout_toRightOf="@+id/edit_item_price"
+                    android:layout_toEndOf="@+id/edit_item_price" />
 
             </RelativeLayout>
 
@@ -160,7 +160,7 @@
     <Button
         android:id="@+id/button_order"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="34dp"
         android:onClick="order"
         android:text="@string/order" />
 

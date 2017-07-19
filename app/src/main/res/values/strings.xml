@@ -17,4 +17,10 @@
     <string name="plus"> + </string>
     <string name="currency">£</string>
     <string name="order">Order more</string>
+    <string name="add_item_title">Add item</string>
+    <string name="edit_product_title">Edit Product</string>
+    <string name="change_photo">Click to change photo</string>
+    <string name="intentType">image/*</string>
+    <string name="selectPicture">Select Picture</string>
+    <string name="notLessQuantity">The quantity cannot be less than 0! </string>
 </resources>
