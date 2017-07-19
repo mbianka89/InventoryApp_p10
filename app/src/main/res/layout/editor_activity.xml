@@ -129,16 +129,16 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="62dp"
-        android:orientation="horizontal"
+        android:layout_width="200dp"
+        android:layout_height="26dp"
         android:layout_gravity="center"
+        android:orientation="horizontal"
         android:weightSum="1">
 
         <Button
             android:id="@+id/button_minus"
-            android:layout_height="40dp"
             android:layout_width="40dp"
+            android:layout_height="40dp"
             android:onClick="decrement"
             android:text="@string/minus" />
 
@@ -150,8 +150,8 @@
 
         <Button
             android:id="@+id/button_plus"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:onClick="increment"
             android:text="@string/plus" />
     </LinearLayout>
