@@ -23,4 +23,23 @@
     <string name="intentType">image/*</string>
     <string name="selectPicture">Select Picture</string>
     <string name="notLessQuantity">The quantity cannot be less than 0! </string>
+    <string name="discard_and_quit">Discard your changes and quit editing?</string>
+    <string name="discard">Yes, let`s discard my changes.</string>
+    <string name="keep_editing">No, let`s keep editing.</string>
+    <string name="action_save">Save all.</string>
+    <string name="itemNameReq">Product name required</string>
+    <string name="itemPriceReq">Product price required</string>
+    <string name="supplierNameReq">Supplier name required</string>
+    <string name="supplierEmailReq">Supplier email required</string>
+    <string name="quantityReq">Product quantity required</string>
+    <string name="itemPicReq">Product picture required</string>
+    <string name="error_saving_item">Error saving product</string>
+    <string name="item_saved">Product saved</string>
+    <string name="editor_delete_item_done">Product deleted</string>
+    <string name="editor_delete_item_failed">Error with deleting product</string>
+    <string name="delete_item_message">Delete this item?</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+    <string name="soldOut">Item sold out</string>
+
 </resources>
