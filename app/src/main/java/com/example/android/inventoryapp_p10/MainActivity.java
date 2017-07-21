@@ -4,20 +4,35 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-public class MainActivity extends AppCompatActivity {
+import com.example.android.inventoryapp_p10.Data.ItemContract;
+
+public class MainActivity extends AppCompatActivity implements
+        LoaderManager.LoaderCallbacks<Cursor> {
+
+    private static final int ITEM_LOADER = 0;
+
+    ItemCursorAdapter mCursorAdapter;
+    private RecyclerView mRecyclerView;
+    private RecyclerView.LayoutManager mLayoutManager;
+    View emptyView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -29,6 +44,17 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        mRecyclerView = (RecyclerView) findViewById(R.id.list_view);
+        mLayoutManager = new LinearLayoutManager(MainActivity.this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        emptyView = findViewById(R.id.empty_view);
+
+        mCursorAdapter = new ItemCursorAdapter(this, null);
+        mRecyclerView.setAdapter(mCursorAdapter);
+
+        getSupportLoaderManager().initLoader(ITEM_LOADER, null, this);
     }
 
 
@@ -58,16 +84,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         String[] projection = {
-                ItemEntry._ID,
-                ItemEntry.COLUMN_ITEM_NAME,
-                ItemEntry.COLUMN_ITEM_PRICE,
-                ItemEntry.COLUMN_ITEM_QUANTITY,
-                ItemEntry.COLUMN_ITEM_PICTURE,
-                ItemEntry.COLUMN_ITEM_SUPPLIER_NAME,
-                ItemEntry.COLUMN_ITEM_SUPPLIER_EMAIL};
+                ItemContract.ItemEntry._ID,
+                ItemContract.ItemEntry.COLUMN_ITEM_NAME,
+                ItemContract.ItemEntry.COLUMN_ITEM_PRICE,
+                ItemContract.ItemEntry.COLUMN_ITEM_QUANTITY,
+                ItemContract.ItemEntry.COLUMN_ITEM_IMAGE,
+                ItemContract.ItemEntry.COLUMN_ITEM_SUPPLIER_NAME,
+                ItemContract.ItemEntry.COLUMN_ITEM_SUPPLIER_EMAIL};
 
         return new CursorLoader(this,
-                ItemEntry.CONTENT_URI,
+                ItemContract.ItemEntry.CONTENT_URI,
                 projection,
                 null,
                 null,
@@ -76,4 +102,16 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-    }}
+        if(!data.moveToFirst()) {
+            emptyView.setVisibility(View.VISIBLE);
+        } else {
+            emptyView.setVisibility(View.GONE);
+        }
+        mCursorAdapter.swapCursor(data);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        mCursorAdapter.swapCursor(null);
+    }
+}

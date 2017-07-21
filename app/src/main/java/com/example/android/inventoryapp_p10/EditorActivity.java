@@ -30,12 +30,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.android.inventoryapp_p10.Data.ItemContract;
+
 
 /**
  * Created by Bianka Matyas on 19/07/2017.
  */
 
-public class EditorActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+public class EditorActivity extends AppCompatActivity
+        implements LoaderCallbacks<Cursor> {
 
     private static final int EXISTING_ITEM_LOADER = 0;
     Uri imageUri;
@@ -78,7 +81,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderCallbacks
         mEditTextPrice = (EditText) findViewById(R.id.edit_item_price);
         mEditTextSupplierName = (EditText) findViewById(R.id.supplier_name);
         mEditTextSupplierEmail = (EditText) findViewById(R.id.supplier_email);
-
         mQuantityTextView = (TextView) findViewById(R.id.edit_quantity_text_view);
         mPlusButton = (Button) findViewById(R.id.button_plus);
         mMinusButton = (Button) findViewById(R.id.button_minus);
@@ -140,25 +142,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderCallbacks
         startActivityForResult(Intent.createChooser(intent, getString(R.string.selectPicture)), 0);
     }
 
-    public void increment(View view) {
-        mQuantity++;
-        displayQuantity();
-    }
-
-    public void decrement(View view) {
-        if (mQuantity == 0) {
-            Toast.makeText(this, R.string.notLessQuantity, Toast.LENGTH_SHORT).show();
-        } else {
-            mQuantity--;
-            displayQuantity();
-        }
-    }
-
-    public void displayQuantity() {
-        mQuantityTextView.setText(String.valueOf(mQuantity));
-    }
-
-}
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -288,7 +271,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderCallbacks
         intent.setType("text/plain");
         intent.setData(Uri.parse("mailto:" + mEditTextSupplierEmail.getText().toString().trim()));
         intent.putExtra(android.content.Intent.EXTRA_SUBJECT, "New order of " + mEditTextName.getText().toString().trim());
-        String message = "Hello " + mEditTextSupplierName.getText().toString().trim() + ", \n I wish to order more of your product: " + mNameEditText.getText().toString().trim() + ", please find the details below:";
+        String message = "Hello " + mEditTextSupplierName.getText().toString().trim() + ", \n I wish to order more of your product: " + mEditTextName.getText().toString().trim() + ", please find the details below:";
         intent.putExtra(android.content.Intent.EXTRA_TEXT, message);
         startActivity(intent);
     }
@@ -324,47 +307,47 @@ public class EditorActivity extends AppCompatActivity implements LoaderCallbacks
         }
 
         ContentValues values = new ContentValues();
-        values.put(ItemEntry.COLUMN_ITEM_NAME, nameString);
+        values.put(ItemContract.ItemEntry.COLUMN_ITEM_NAME, nameString);
 
         if (TextUtils.isEmpty(priceString)) {
             Toast.makeText(this, getString(R.string.itemPriceReq), Toast.LENGTH_SHORT).show();
             return allFilledOut;
         }
 
-        values.put(ItemEntry.COLUMN_ITEM_PRICE, priceString);
+        values.put(ItemContract.ItemEntry.COLUMN_ITEM_PRICE, priceString);
 
         if (TextUtils.isEmpty(supplierNameString)) {
             Toast.makeText(this, getString(R.string.supplierNameReq), Toast.LENGTH_SHORT).show();
             return allFilledOut;
         }
 
-        values.put(ItemEntry.COLUMN_ITEM_SUPPLIER_NAME, supplierNameString);
+        values.put(ItemContract.ItemEntry.COLUMN_ITEM_SUPPLIER_NAME, supplierNameString);
 
         if (TextUtils.isEmpty(supplierEmailString)) {
             Toast.makeText(this, getString(R.string.supplierEmailReq), Toast.LENGTH_SHORT).show();
             return allFilledOut;
         }
 
-        values.put(ItemEntry.COLUMN_ITEM_SUPPLIER_EMAIL, supplierEmailString);
+        values.put(ItemContract.ItemEntry.COLUMN_ITEM_SUPPLIER_EMAIL, supplierEmailString);
 
         if (TextUtils.isEmpty(quantityString)) {
             Toast.makeText(this, getString(R.string.quantityReq), Toast.LENGTH_SHORT).show();
             return allFilledOut;
         }
-        values.put(ItemEntry.COLUMN_ITEM_QUANTITY, quantityString);
+        values.put(ItemContract.ItemEntry.COLUMN_ITEM_QUANTITY, quantityString);
 
         if (imageUri == null) {
             Toast.makeText(this, getString(R.string.itemPicReq), Toast.LENGTH_SHORT).show();
             return allFilledOut;
         }
 
-        values.put(ItemEntry.COLUMN_ITEM_IMAGE, imageUri.toString());
+        values.put(ItemContract.ItemEntry.COLUMN_ITEM_IMAGE, imageUri.toString());
 
         // Determine if this is a new or existing item by checking if mCurrentPruductUri is null or not
         if (mCurrentItemUri == null) {
             // This is a NEW item, so insert a new item into the provider,
             // returning the content URI for the new item.
-            Uri newUri = getContentResolver().insert(ItemEntry.CONTENT_URI, values);
+            Uri newUri = getContentResolver().insert(ItemContract.ItemEntry.CONTENT_URI, values);
             // Show a toast message depending on whether or not the insertion was successful.
             if (newUri == null) {
                 // If the new content URI is null, then there was an error with insertion.
@@ -447,13 +430,13 @@ public class EditorActivity extends AppCompatActivity implements LoaderCallbacks
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         String[] projection = {
-                ItemEntry._ID,
-                ItemEntry.COLUMN_ITEM_NAME,
-                ItemEntry.COLUMN_ITEM_PRICE,
-                ItemEntry.COLUMN_ITEM_QUANTITY,
-                ItemEntry.COLUMN_ITEM_IMAGE,
-                ItemEntry.COLUMN_ITEM_SUPPLIER_NAME,
-                ItemEntry.COLUMN_ITEM_SUPPLIER_EMAIL};
+                ItemContract.ItemEntry._ID,
+                ItemContract.ItemEntry.COLUMN_ITEM_NAME,
+                ItemContract.ItemEntry.COLUMN_ITEM_PRICE,
+                ItemContract.ItemEntry.COLUMN_ITEM_QUANTITY,
+                ItemContract.ItemEntry.COLUMN_ITEM_IMAGE,
+                ItemContract.ItemEntry.COLUMN_ITEM_SUPPLIER_NAME,
+                ItemContract.ItemEntry.COLUMN_ITEM_SUPPLIER_EMAIL};
 
         return new CursorLoader(this,
                 mCurrentItemUri,
@@ -463,44 +446,69 @@ public class EditorActivity extends AppCompatActivity implements LoaderCallbacks
                 null);
     }
 
+        @Override
+        public void onLoadFinished (Loader < Cursor > loader, Cursor cursor){
+            if (cursor == null || cursor.getCount() < 1) {
+                return;
+            }
+
+            // Proceed with moving to the first row of the cursor and reading data from it
+            // (This should be the only row in the cursor)
+            if (cursor.moveToFirst()) {
+                // Find the columns of item attributes that we're interested in
+                int nameColumnIndex = cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_ITEM_NAME);
+                int priceColumnIndex = cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_ITEM_PRICE);
+                int quantityColumnIndex = cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_ITEM_QUANTITY);
+                int imageColumnIndex = cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_ITEM_IMAGE);
+                int sNameColumnIndex = cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_ITEM_SUPPLIER_NAME);
+                int sEmailColumnIndex = cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_ITEM_SUPPLIER_EMAIL);
+                // Extract out the value from the Cursor for the given column index
+                String name = cursor.getString(nameColumnIndex);
+                String price = cursor.getString(priceColumnIndex);
+                String sName = cursor.getString(sNameColumnIndex);
+                String sEmail = cursor.getString(sEmailColumnIndex);
+                mQuantity = cursor.getInt(quantityColumnIndex);
+                String imageUriString = cursor.getString(imageColumnIndex);
+                // Update the views on the screen with the values from the database
+                mEditTextName.setText(name);
+                mEditTextPrice.setText(price);
+                mEditTextSupplierName.setText(sName);
+                mEditTextSupplierEmail.setText(sEmail);
+                mQuantityTextView.setText(Integer.toString(mQuantity));
+                imageUri = Uri.parse(imageUriString);
+                mImage.setImageURI(imageUri);
+            }
+        }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
-
+        mEditTextName.setText("");
+        mEditTextPrice.setText("");
+        mEditTextSupplierName.setText("");
+        mEditTextSupplierEmail.setText("");
+        mQuantityTextView.setText("");
     }
 
-    @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-        if (cursor == null || cursor.getCount() < 1) {
-            return;
-        }
 
-        // Proceed with moving to the first row of the cursor and reading data from it
-        // (This should be the only row in the cursor)
-        if (cursor.moveToFirst()) {
-            // Find the columns of item attributes that we're interested in
-            int nameColumnIndex = cursor.getColumnIndex(ItemEntry.COLUMN_ITEM_NAME);
-            int priceColumnIndex = cursor.getColumnIndex(ItemEntry.COLUMN_ITEM_PRICE);
-            int quantityColumnIndex = cursor.getColumnIndex(ItemEntry.COLUMN_ITEM_QUANTITY);
-            int pictureColumnIndex = cursor.getColumnIndex(ItemEntry.COLUMN_ITEM_PICTURE);
-            int sNameColumnIndex = cursor.getColumnIndex(ItemEntry.COLUMN_ITEM_SUPPLIER_NAME);
-            int sEmailColumnIndex = cursor.getColumnIndex(ItemEntry.COLUMN_ITEM_SUPPLIER_EMAIL);
-            // Extract out the value from the Cursor for the given column index
-            String name = cursor.getString(nameColumnIndex);
-            String price = cursor.getString(priceColumnIndex);
-            String sName = cursor.getString(sNameColumnIndex);
-            String sEmail = cursor.getString(sEmailColumnIndex);
-            mQuantity = cursor.getInt(quantityColumnIndex);
-            String imageUriString = cursor.getString(pictureColumnIndex);
-            // Update the views on the screen with the values from the database
-            mEditTextName.setText(name);
-            mEditTextPrice.setText(price);
-            mEditTextSupplierName.setText(sName);
-            mEditTextSupplierEmail.setText(sEmail);
-            mQuantityTextView.setText(Integer.toString(mQuantity));
-            imageUri = Uri.parse(imageUriString);
-            mImage.setImageURI(imageUri);
+
+
+    public void increment(View view) {
+        mQuantity++;
+        displayQuantity();
+    }
+
+    public void decrement(View view) {
+        if (mQuantity == 0) {
+            Toast.makeText(this, R.string.notLessQuantity, Toast.LENGTH_SHORT).show();
+        } else {
+            mQuantity--;
+            displayQuantity();
         }
+    }
+
+    public void displayQuantity() {
+        mQuantityTextView.setText(String.valueOf(mQuantity));
     }
 
 }
+
