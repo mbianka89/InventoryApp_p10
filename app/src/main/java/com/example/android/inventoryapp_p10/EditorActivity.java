@@ -35,7 +35,7 @@ import android.widget.Toast;
  * Created by Bianka Matyas on 19/07/2017.
  */
 
-public class EditorActivity extends AppCompatActivity implements LoaderCallbacks<Object> {
+public class EditorActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
     private static final int EXISTING_ITEM_LOADER = 0;
     Uri imageUri;
@@ -138,21 +138,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderCallbacks
         }
         intent.setType(getString(R.string.intentType));
         startActivityForResult(Intent.createChooser(intent, getString(R.string.selectPicture)), 0);
-    }
-
-    @Override
-    public Loader<Object> onCreateLoader(int id, Bundle args) {
-        return null;
-    }
-
-    @Override
-    public void onLoadFinished(Loader<Object> loader, Object data) {
-
-    }
-
-    @Override
-    public void onLoaderReset(Loader<Object> loader) {
-
     }
 
     public void increment(View view) {
@@ -478,6 +463,12 @@ public class EditorActivity extends AppCompatActivity implements LoaderCallbacks
                 null);
     }
 
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+
+    }
+
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
         if (cursor == null || cursor.getCount() < 1) {
@@ -510,15 +501,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderCallbacks
             imageUri = Uri.parse(imageUriString);
             mImage.setImageURI(imageUri);
         }
-    }
-
-    @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
-        mEditTextName.setText("");
-        mEditTextPrice.setText("");
-        mEditTextSupplierName.setText("");
-        mEditTextSupplierEmail.setText("");
-        mQuantityTextView.setText("");
     }
 
 }

@@ -76,18 +76,4 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        if(!data.moveToFirst()) {
-            emptyView.setVisibility(View.VISIBLE);
-        } else {
-            emptyView.setVisibility(View.GONE);
-        }
-        mCursorAdapter.swapCursor(data);
-    }
-
-    @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
-        mCursorAdapter.swapCursor(null);
-    }
-}
-
-
+    }}

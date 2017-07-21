@@ -77,22 +77,6 @@ public class ItemCursorAdapter extends CursorRecyclerAdapter<ItemCursorAdapter.V
         viewHolder.productPicture.setImageURI(imageUri);
         viewHolder.productPicture.invalidate();
 
-        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                activity.onItemClick(id);
-            }
-        });
 
-        viewHolder.buy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(mQuantity >0 ) {
-                    activity.onBuyNowClick(id, mQuantity);
-                } else {
-                    Toast.makeText(activity, R.string.soldOut, Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
     }
 }
