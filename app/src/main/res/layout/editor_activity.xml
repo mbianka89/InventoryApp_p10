@@ -13,8 +13,8 @@
 
         <ImageView
             android:id="@+id/item_image"
-            android:layout_width="195dp"
-            android:layout_height="133dp"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
             android:src="@drawable/blank">
 
         </ImageView>
