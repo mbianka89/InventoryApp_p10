@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.android.inventoryapp_p10.Data.ItemContract;
 
@@ -81,5 +82,22 @@ public class ItemCursorAdapter extends CursorRecyclerAdapter<ItemCursorAdapter.V
         viewHolder.productPicture.setImageBitmap(imageBitmap);
         viewHolder.productPicture.invalidate();
 
-    }}
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activity.onItemClick(id);
+            }
+        });
 
+        viewHolder.buy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mQuantity > 0) {
+                    activity.onShopClick(id, mQuantity);
+                } else {
+                    Toast.makeText(activity, R.string.soldOut, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+}
