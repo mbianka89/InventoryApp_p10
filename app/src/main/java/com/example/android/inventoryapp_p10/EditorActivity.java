@@ -484,6 +484,7 @@ public class EditorActivity extends AppCompatActivity
 
             // Extract out the value from the Cursor for the given column index
             String name = cursor.getString(nameColumnIndex);
+            imageUri = Uri.EMPTY;
             String price = cursor.getString(priceColumnIndex);
             String sName = cursor.getString(sNameColumnIndex);
             String sEmail = cursor.getString(sEmailColumnIndex);
