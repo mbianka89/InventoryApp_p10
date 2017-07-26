@@ -17,8 +17,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 
 import com.example.android.inventoryapp_p10.Data.ItemContract;
@@ -62,26 +60,6 @@ public class MainActivity extends AppCompatActivity implements
         mRecyclerView.setAdapter(mCursorAdapter);
 
         getSupportLoaderManager().initLoader(ITEM_LOADER, null, this);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_insert_dummmy_data:
-                insertItem();
-                return true;
-            case R.id.action_delete_all_entries:
-                deleteAllItem();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override

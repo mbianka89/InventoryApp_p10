@@ -482,19 +482,6 @@ public class EditorActivity extends AppCompatActivity
             Bitmap imageBitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
             mImage.setImageBitmap(imageBitmap);
 
-            // Extract out the value from the Cursor for the given column index
-            String name = cursor.getString(nameColumnIndex);
-            imageUri = Uri.EMPTY;
-            String price = cursor.getString(priceColumnIndex);
-            String sName = cursor.getString(sNameColumnIndex);
-            String sEmail = cursor.getString(sEmailColumnIndex);
-            mQuantity = cursor.getInt(quantityColumnIndex);
-            // Update the views on the screen with the values from the database
-            mEditTextName.setText(name);
-            mEditTextPrice.setText(price);
-            mEditTextSupplierName.setText(sName);
-            mEditTextSupplierEmail.setText(sEmail);
-            mQuantityTextView.setText(Integer.toString(mQuantity));
         }
     }
 
