@@ -69,19 +69,16 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_insert_dummmy_data) {
-            return true;
+        switch (item.getItemId()) {
+            case R.id.action_insert_dummmy_data:
+                insertItem();
+                return true;
+            case R.id.action_delete_all_entries:
+                deleteAllItem();
+                return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
-
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
@@ -117,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements
         mCursorAdapter.swapCursor(null);
     }
 
-    private void insertProduct() {
+    private void insertItem() {
         ContentValues values = new ContentValues();
 
         values.put(ItemContract.ItemEntry.COLUMN_ITEM_NAME, "Android Wear");
