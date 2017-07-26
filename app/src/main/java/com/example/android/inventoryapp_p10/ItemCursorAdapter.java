@@ -1,14 +1,14 @@
 package com.example.android.inventoryapp_p10;
 
 import android.database.Cursor;
-import android.net.Uri;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.android.inventoryapp_p10.Data.ItemContract;
 
@@ -59,7 +59,7 @@ public class ItemCursorAdapter extends CursorRecyclerAdapter<ItemCursorAdapter.V
         final long id;
         final int mQuantity;
 
-        id =cursor.getLong(cursor.getColumnIndex(ItemContract.ItemEntry._ID));
+        id = cursor.getLong(cursor.getColumnIndex(ItemContract.ItemEntry._ID));
         int nameColumnIndex = cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_ITEM_NAME);
         int priceColumnIndex = cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_ITEM_PRICE);
         int quantityColumnIndex = cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_ITEM_QUANTITY);
@@ -68,36 +68,18 @@ public class ItemCursorAdapter extends CursorRecyclerAdapter<ItemCursorAdapter.V
         String productName = cursor.getString(nameColumnIndex);
         String productPrice = cursor.getString(priceColumnIndex);
         int quantity = cursor.getInt(quantityColumnIndex);
-        String imageUriString = cursor.getString(imageColumnIndex);
-        Uri imageUri = Uri.parse(imageUriString);
+        byte[] imageBytes = cursor.getBlob(imageColumnIndex);
+
+        Bitmap imageBitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+
 
         mQuantity = quantity;
 
         viewHolder.nameTextView.setText(productName);
         viewHolder.priceTextView.setText(productPrice);
         viewHolder.quantityTextView.setText(String.valueOf(quantity));
-        viewHolder.productPicture.setImageURI(imageUri);
+        viewHolder.productPicture.setImageBitmap(imageBitmap);
         viewHolder.productPicture.invalidate();
 
-        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                activity.onItemClick(id);
-            }
-        });
+    }}
 
-        viewHolder.shop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(mQuantity >0 ) {
-                    activity.onShopClick(id, mQuantity);
-                } else {
-                    Toast.makeText(activity, R.string.soldOut, Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }
-
-
-    }
-}

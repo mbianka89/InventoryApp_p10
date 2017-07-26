@@ -464,7 +464,6 @@ public class EditorActivity extends AppCompatActivity
                 int sNameColumnIndex = cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_ITEM_SUPPLIER_NAME);
                 int sEmailColumnIndex = cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_ITEM_SUPPLIER_EMAIL);
 
-
                 int imageColumnIndex = cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_ITEM_IMAGE);
                 byte[] imageBytes = cursor.getBlob(imageColumnIndex);
                 Bitmap imageBitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
