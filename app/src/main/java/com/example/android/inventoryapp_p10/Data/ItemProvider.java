@@ -52,12 +52,11 @@ public class ItemProvider extends ContentProvider {
 
         Log.v("ItemProvide", "Cursor: " + cursor);
 
-
         return cursor;
     }
 
     @Override
-    public String getType( Uri uri) {
+    public String getType(Uri uri) {
         final int match = sUriMatcher.match(uri);
         switch (match) {
             case ITEMS:
@@ -80,7 +79,7 @@ public class ItemProvider extends ContentProvider {
         }
     }
 
-    private Uri insertItem (Uri uri, ContentValues values) {
+    private Uri insertItem(Uri uri, ContentValues values) {
 
         String name = values.getAsString(ItemContract.ItemEntry.COLUMN_ITEM_NAME);
         if (name == null) {
@@ -88,7 +87,7 @@ public class ItemProvider extends ContentProvider {
         }
 
         String price = values.getAsString(ItemContract.ItemEntry.COLUMN_ITEM_PRICE);
-        if (price == null ) {
+        if (price == null) {
             throw new IllegalArgumentException("Item requires valid price");
         }
 
@@ -130,7 +129,6 @@ public class ItemProvider extends ContentProvider {
         // Track the number of rows that were deleted
         int rowsDeleted;
 
-
         final int match = sUriMatcher.match(uri);
 
         switch (match) {
@@ -139,7 +137,7 @@ public class ItemProvider extends ContentProvider {
                 break;
             case ITEM_ID:
                 selection = ItemContract.ItemEntry._ID + "=?";
-                selectionArgs = new String[] {String.valueOf(ContentUris.parseId(uri))};
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
                 rowsDeleted = database.delete(ItemContract.ItemEntry.TABLE_NAME, selection, selectionArgs);
                 break;
             default:
@@ -165,7 +163,7 @@ public class ItemProvider extends ContentProvider {
                 // so we know which row to update. Selection will be "_id=?" and selection
                 // arguments will be a String array containing the actual ID.
                 selection = ItemContract.ItemEntry._ID + "=?";
-                selectionArgs = new String[] { String.valueOf(ContentUris.parseId(uri)) };
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
                 return updateItem(uri, contentValues, selection, selectionArgs);
             default:
                 throw new IllegalArgumentException("Update is not supported for " + uri);

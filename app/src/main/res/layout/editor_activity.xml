@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/editor_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="1"
-    android:id="@+id/editor_activity">
+    android:weightSum="1">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="vertical">
 
         <ImageView
             android:id="@+id/item_image"
             android:layout_width="match_parent"
             android:layout_height="240dp"
-            android:src="@drawable/blank">
-
-        </ImageView>
+            android:src="@drawable/blank"></ImageView>
 
         <TextView
             android:id="@+id/add_photo_text"
@@ -46,35 +44,35 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.25"
                 android:layout_gravity="bottom"
+                android:layout_marginTop="16dp"
+                android:layout_weight="0.25"
                 android:text="@string/item_name"
-                android:textStyle="bold"
-                android:layout_marginTop="16dp"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:layout_weight="0.25"
                 android:text="@string/item_price"
-                android:textStyle="bold"
-                android:layout_marginTop="16dp"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:layout_weight="0.25"
                 android:text="@string/supplier_name"
-                android:textStyle="bold"
-                android:layout_marginTop="16dp"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:layout_weight="0.25"
                 android:text="@string/supplier_email"
-                android:textStyle="bold"
-                android:layout_marginTop="16dp"/>
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -105,12 +103,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:text="@string/currency"
                     android:layout_alignBaseline="@+id/edit_item_price"
                     android:layout_alignBottom="@+id/edit_item_price"
+                    android:layout_toEndOf="@+id/edit_item_price"
                     android:layout_toRightOf="@+id/edit_item_price"
-                    android:layout_toEndOf="@+id/edit_item_price" />
+                    android:text="@string/currency"
+                    android:textSize="20sp" />
 
             </RelativeLayout>
 
@@ -161,8 +159,8 @@
         android:id="@+id/button_order"
         android:layout_width="wrap_content"
         android:layout_height="34dp"
+        android:layout_gravity="center"
         android:onClick="order"
-        android:text="@string/order"
-        android:layout_gravity="center"/>
+        android:text="@string/order" />
 
 </LinearLayout>

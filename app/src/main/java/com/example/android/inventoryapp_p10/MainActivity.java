@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity implements
     private RecyclerView.LayoutManager mLayoutManager;
     View emptyView;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +63,6 @@ public class MainActivity extends AppCompatActivity implements
 
         getSupportLoaderManager().initLoader(ITEM_LOADER, null, this);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -164,7 +162,8 @@ public class MainActivity extends AppCompatActivity implements
             return stream.toByteArray();
         } else {
             return null;
-        }}
+        }
+    }
 
     private void deleteAllItem() {
         int rowsDeleted = getContentResolver().delete(ItemContract.ItemEntry.CONTENT_URI, null, null);

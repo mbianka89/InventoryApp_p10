@@ -63,7 +63,6 @@ public abstract class CursorRecyclerAdapter<VH extends RecyclerView.ViewHolder> 
         onBindViewHolder(holder, cur);
 
 
-
     }
 
     public Cursor swapCursor(Cursor newCursor) {
@@ -107,5 +106,4 @@ public abstract class CursorRecyclerAdapter<VH extends RecyclerView.ViewHolder> 
             //There is no notifyDataSetInvalidated() method in RecyclerView.Adapter
         }
     }
-
 }

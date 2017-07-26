@@ -37,7 +37,6 @@ import com.example.android.inventoryapp_p10.Data.ItemContract;
 
 import java.io.ByteArrayOutputStream;
 
-
 /**
  * Created by Bianka Matyas on 19/07/2017.
  */
@@ -146,7 +145,6 @@ public class EditorActivity extends AppCompatActivity
         intent.setType(getString(R.string.intentType));
         startActivityForResult(Intent.createChooser(intent, getString(R.string.selectPicture)), 0);
     }
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -348,7 +346,7 @@ public class EditorActivity extends AppCompatActivity
 
         BitmapDrawable drawable = (BitmapDrawable) mImage.getDrawable();
         byte[] imageBytes = getBytes(drawable.getBitmap());
-        values.put(ItemContract.ItemEntry.COLUMN_ITEM_IMAGE,imageBytes);
+        values.put(ItemContract.ItemEntry.COLUMN_ITEM_IMAGE, imageBytes);
 
         // Determine if this is a new or existing item by checking if mCurrentPruductUri is null or not
         if (mCurrentItemUri == null) {
@@ -526,6 +524,4 @@ public class EditorActivity extends AppCompatActivity
     public void displayQuantity() {
         mQuantityTextView.setText(String.valueOf(mQuantity));
     }
-
 }
-

@@ -34,7 +34,6 @@ public class ItemCursorAdapter extends CursorRecyclerAdapter<ItemCursorAdapter.V
         protected ImageView buy;
         protected ImageView productPicture;
 
-
         public ViewHolder(View itemView) {
             super(itemView);
             nameTextView = (TextView) itemView.findViewById(R.id.list_item_product_name);
@@ -44,7 +43,6 @@ public class ItemCursorAdapter extends CursorRecyclerAdapter<ItemCursorAdapter.V
             productPicture = (ImageView) itemView.findViewById(R.id.list_item_product_image_view);
         }
     }
-
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -99,5 +97,4 @@ public class ItemCursorAdapter extends CursorRecyclerAdapter<ItemCursorAdapter.V
             }
         });
     }
-
 }
