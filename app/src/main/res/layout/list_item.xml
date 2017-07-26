@@ -43,6 +43,12 @@
             android:layout_height="wrap_content"
             android:text="(61 available)" />
 
+        <TextView
+            android:id="@+id/list_item_supplier_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Supplier" />
+
 
     </LinearLayout>
 

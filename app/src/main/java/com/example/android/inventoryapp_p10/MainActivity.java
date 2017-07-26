@@ -122,6 +122,7 @@ public class MainActivity extends AppCompatActivity implements
         values.put(ItemContract.ItemEntry.COLUMN_ITEM_QUANTITY, 5);
         values.put(ItemContract.ItemEntry.COLUMN_ITEM_SUPPLIER_EMAIL, "bianka@gmail.com");
         values.put(ItemContract.ItemEntry.COLUMN_ITEM_IMAGE, R.drawable.android_wear);
+        values.put(ItemContract.ItemEntry.COLUMN_ITEM_SUPPLIER_NAME, "John Doe");
 
         getContentResolver().insert(ItemContract.ItemEntry.CONTENT_URI, values);
     }

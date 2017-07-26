@@ -32,6 +32,7 @@ public class ItemCursorAdapter extends CursorRecyclerAdapter<ItemCursorAdapter.V
         protected ImageView buy;
         protected ImageView productPicture;
 
+
         public ViewHolder(View itemView) {
             super(itemView);
             nameTextView = (TextView) itemView.findViewById(R.id.list_item_product_name);

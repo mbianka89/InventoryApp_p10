@@ -41,7 +41,7 @@
     <string name="delete">Delete</string>
     <string name="cancel">Cancel</string>
     <string name="soldOut">Item sold out</string>
-    <string name="empty_text">No items to show... :(</string>
-    <string name="empty_text_2">Please add items!</string>
+    <string name="empty_text"> </string>
+    <string name="empty_text_2"> </string>
 
 </resources>
