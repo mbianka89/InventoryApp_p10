@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -33,6 +34,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.inventoryapp_p10.Data.ItemContract;
+
+import java.io.ByteArrayOutputStream;
 
 
 /**
@@ -343,7 +346,9 @@ public class EditorActivity extends AppCompatActivity
             return allFilledOut;
         }
 
-        values.put(ItemContract.ItemEntry.COLUMN_ITEM_IMAGE, imageUri.toString());
+        BitmapDrawable drawable = (BitmapDrawable) mImage.getDrawable();
+        byte[] imageBytes = getBytes(drawable.getBitmap());
+        values.put(ItemContract.ItemEntry.COLUMN_ITEM_IMAGE,imageBytes);
 
         // Determine if this is a new or existing item by checking if mCurrentPruductUri is null or not
         if (mCurrentItemUri == null) {
@@ -381,6 +386,16 @@ public class EditorActivity extends AppCompatActivity
         }
         allFilledOut = true;
         return allFilledOut;
+    }
+
+    private static byte[] getBytes(Bitmap bitmap) {
+        if (bitmap != null) {
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 0, stream);
+            return stream.toByteArray();
+        } else {
+            return null;
+        }
     }
 
     private void showDeleteConfirmationDialog() {
@@ -448,41 +463,42 @@ public class EditorActivity extends AppCompatActivity
                 null);
     }
 
-        @Override
-        public void onLoadFinished (Loader < Cursor > loader, Cursor cursor) {
-            if (cursor == null || cursor.getCount() < 1) {
-                return;
-            }
-
-            // Proceed with moving to the first row of the cursor and reading data from it
-            // (This should be the only row in the cursor)
-            if (cursor.moveToFirst()) {
-                // Find the columns of item attributes that we're interested in
-                int nameColumnIndex = cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_ITEM_NAME);
-                int priceColumnIndex = cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_ITEM_PRICE);
-                int quantityColumnIndex = cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_ITEM_QUANTITY);
-                int sNameColumnIndex = cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_ITEM_SUPPLIER_NAME);
-                int sEmailColumnIndex = cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_ITEM_SUPPLIER_EMAIL);
-
-                int imageColumnIndex = cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_ITEM_IMAGE);
-                byte[] imageBytes = cursor.getBlob(imageColumnIndex);
-                Bitmap imageBitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
-                mImage.setImageBitmap(imageBitmap);
-
-                // Extract out the value from the Cursor for the given column index
-                String name = cursor.getString(nameColumnIndex);
-                String price = cursor.getString(priceColumnIndex);
-                String sName = cursor.getString(sNameColumnIndex);
-                String sEmail = cursor.getString(sEmailColumnIndex);
-                mQuantity = cursor.getInt(quantityColumnIndex);
-                // Update the views on the screen with the values from the database
-                mEditTextName.setText(name);
-                mEditTextPrice.setText(price);
-                mEditTextSupplierName.setText(sName);
-                mEditTextSupplierEmail.setText(sEmail);
-                mQuantityTextView.setText(Integer.toString(mQuantity));
-            }
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+        if (cursor == null || cursor.getCount() < 1) {
+            return;
         }
+
+        // Proceed with moving to the first row of the cursor and reading data from it
+        // (This should be the only row in the cursor)
+        if (cursor.moveToFirst()) {
+            // Find the columns of item attributes that we're interested in
+            int nameColumnIndex = cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_ITEM_NAME);
+            int priceColumnIndex = cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_ITEM_PRICE);
+            int quantityColumnIndex = cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_ITEM_QUANTITY);
+            int sNameColumnIndex = cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_ITEM_SUPPLIER_NAME);
+            int sEmailColumnIndex = cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_ITEM_SUPPLIER_EMAIL);
+
+            int imageColumnIndex = cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_ITEM_IMAGE);
+            byte[] imageBytes = cursor.getBlob(imageColumnIndex);
+            Bitmap imageBitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+            mImage.setImageBitmap(imageBitmap);
+
+            // Extract out the value from the Cursor for the given column index
+            String name = cursor.getString(nameColumnIndex);
+            String price = cursor.getString(priceColumnIndex);
+            String sName = cursor.getString(sNameColumnIndex);
+            String sEmail = cursor.getString(sEmailColumnIndex);
+            mQuantity = cursor.getInt(quantityColumnIndex);
+            // Update the views on the screen with the values from the database
+            mEditTextName.setText(name);
+            mEditTextPrice.setText(price);
+            mEditTextSupplierName.setText(sName);
+            mEditTextSupplierEmail.setText(sEmail);
+            mQuantityTextView.setText(Integer.toString(mQuantity));
+        }
+    }
+
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         mEditTextName.setText("");
@@ -491,8 +507,6 @@ public class EditorActivity extends AppCompatActivity
         mEditTextSupplierEmail.setText("");
         mQuantityTextView.setText("");
     }
-
-
 
 
     public void increment(View view) {
