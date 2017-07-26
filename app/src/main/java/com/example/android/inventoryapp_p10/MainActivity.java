@@ -1,5 +1,6 @@
 package com.example.android.inventoryapp_p10;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -102,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        if(null != data && !data.moveToFirst()) {
+        if (null != data && !data.moveToFirst()) {
             emptyView.setVisibility(View.VISIBLE);
         } else {
             emptyView.setVisibility(View.GONE);
@@ -113,5 +115,22 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         mCursorAdapter.swapCursor(null);
+    }
+
+    private void insertProduct() {
+        ContentValues values = new ContentValues();
+
+        values.put(ItemContract.ItemEntry.COLUMN_ITEM_NAME, "Android Wear");
+        values.put(ItemContract.ItemEntry.COLUMN_ITEM_PRICE, 120);
+        values.put(ItemContract.ItemEntry.COLUMN_ITEM_QUANTITY, 5);
+        values.put(ItemContract.ItemEntry.COLUMN_ITEM_SUPPLIER_EMAIL, "bianka@gmail.com");
+        values.put(ItemContract.ItemEntry.COLUMN_ITEM_IMAGE, R.drawable.android_wear);
+
+        getContentResolver().insert(ItemContract.ItemEntry.CONTENT_URI, values);
+    }
+
+    private void deleteAllItem() {
+        int rowsDeleted = getContentResolver().delete(ItemContract.ItemEntry.CONTENT_URI, null, null);
+        Log.v("MainActivity", rowsDeleted + " rows deleted from inventory database");
     }
 }

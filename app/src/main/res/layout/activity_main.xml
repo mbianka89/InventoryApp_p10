@@ -21,35 +21,8 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/list_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
-
     <!-- Empty view for the list -->
-    <RelativeLayout
-        android:id="@+id/empty_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true">
 
-    <TextView
-        android:id="@+id/empty_title_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/empty_text" />
-
-    <TextView
-        android:id="@+id/empty_subtitle_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/empty_text_2" />
-    </RelativeLayout>
-
-
-    <include
-        android:id="@+id/include"
-        layout="@layout/content_main" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
@@ -60,5 +33,36 @@
         app:layout_anchor="@+id/include"
         app:layout_anchorGravity="center_vertical|left"
         app:srcCompat="@android:drawable/ic_input_add" />
+
+    <TextView
+        android:id="@+id/empty_subtitle_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/empty_text_2"
+        app:layout_anchor="@+id/include" />
+
+    <RelativeLayout
+        android:id="@+id/empty_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <TextView
+            android:id="@+id/empty_title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/empty_text" />
+
+    </RelativeLayout>
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/content_main" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/list_view"
+        android:paddingTop="80dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
 
 </android.support.design.widget.CoordinatorLayout>
