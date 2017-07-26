@@ -4,7 +4,7 @@
     <string name="action_delete">Delete all data</string>
     <string name="empty_view_text">"Your inventory is empty at the moment.\n
         Start adding items to it with the + button!"</string>
-    <string name="add_image_tv">Click here to insert image!</string>
+    <string name="add_image_tv">Click to the image above to insert your item`s picture!</string>
     <string name="item_name">Item`s name</string>
     <string name="item_price">Item`s price</string>
     <string name="supplier_name">Supplier`s name</string>
@@ -41,7 +41,4 @@
     <string name="delete">Delete</string>
     <string name="cancel">Cancel</string>
     <string name="no_more_items">Item sold out</string>
-    <string name="empty_text"> </string>
-    <string name="empty_text_2"> </string>
-
 </resources>
