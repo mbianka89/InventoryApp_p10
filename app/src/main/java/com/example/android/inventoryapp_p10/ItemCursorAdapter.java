@@ -1,8 +1,11 @@
 package com.example.android.inventoryapp_p10;
 
+import android.content.ContentUris;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -73,7 +76,6 @@ public class ItemCursorAdapter extends CursorRecyclerAdapter<ItemCursorAdapter.V
 
         Bitmap imageBitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
 
-
         mQuantity = quantity;
 
         viewHolder.nameTextView.setText(productName);
@@ -99,5 +101,18 @@ public class ItemCursorAdapter extends CursorRecyclerAdapter<ItemCursorAdapter.V
                 }
             }
         });
+    }
+
+    private View.OnClickListener openItemDetailsAction(final int itemId) {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(activity, EditorActivity.class);
+                Uri contentItemUri = ContentUris.withAppendedId(ItemContract.ItemEntry.CONTENT_URI, itemId);
+                intent.setData(contentItemUri);
+                activity.startActivity(intent);
+            }
+        };
+
     }
 }
