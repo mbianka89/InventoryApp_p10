@@ -470,17 +470,31 @@ public class EditorActivity extends AppCompatActivity
         // Proceed with moving to the first row of the cursor and reading data from it
         // (This should be the only row in the cursor)
         if (cursor.moveToFirst()) {
-            // Find the columns of item attributes that we're interested in
             int nameColumnIndex = cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_ITEM_NAME);
+            String name = cursor.getString(nameColumnIndex);
+            mEditTextName.setText(name);
+
             int priceColumnIndex = cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_ITEM_PRICE);
+            double price = cursor.getDouble(priceColumnIndex);
+            mEditTextPrice.setText(Double.toString(price));
+
             int quantityColumnIndex = cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_ITEM_QUANTITY);
-            int sNameColumnIndex = cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_ITEM_SUPPLIER_NAME);
-            int sEmailColumnIndex = cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_ITEM_SUPPLIER_EMAIL);
+            int quantity = cursor.getInt(quantityColumnIndex);
+            mQuantityTextView.setText(Integer.toString(quantity));
+
+            int supplierContactColumnIndex = cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_ITEM_SUPPLIER_EMAIL);
+            String supplierContact = cursor.getString(supplierContactColumnIndex);
+            mEditTextSupplierEmail.setText(supplierContact);
+
+            int suppliersNameColumnIndex = cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_ITEM_SUPPLIER_NAME);
+            String suppliersName = cursor.getString(suppliersNameColumnIndex);
+            mEditTextSupplierName.setText(suppliersName);
 
             int imageColumnIndex = cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_ITEM_IMAGE);
             byte[] imageBytes = cursor.getBlob(imageColumnIndex);
             Bitmap imageBitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
             mImage.setImageBitmap(imageBitmap);
+            ;
 
         }
     }
