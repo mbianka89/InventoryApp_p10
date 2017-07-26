@@ -449,7 +449,7 @@ public class EditorActivity extends AppCompatActivity
     }
 
         @Override
-        public void onLoadFinished (Loader < Cursor > loader, Cursor cursor){
+        public void onLoadFinished (Loader < Cursor > loader, Cursor cursor) {
             if (cursor == null || cursor.getCount() < 1) {
                 return;
             }
@@ -475,18 +475,14 @@ public class EditorActivity extends AppCompatActivity
                 String sName = cursor.getString(sNameColumnIndex);
                 String sEmail = cursor.getString(sEmailColumnIndex);
                 mQuantity = cursor.getInt(quantityColumnIndex);
-                String imageUriString = cursor.getString(imageColumnIndex);
                 // Update the views on the screen with the values from the database
                 mEditTextName.setText(name);
                 mEditTextPrice.setText(price);
                 mEditTextSupplierName.setText(sName);
                 mEditTextSupplierEmail.setText(sEmail);
                 mQuantityTextView.setText(Integer.toString(mQuantity));
-                imageUri = Uri.parse(imageUriString);
-                mImage.setImageURI(imageUri);
             }
         }
-
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         mEditTextName.setText("");

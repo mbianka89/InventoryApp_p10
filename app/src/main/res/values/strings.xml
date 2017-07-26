@@ -40,7 +40,7 @@
     <string name="delete_item_message">Delete this item?</string>
     <string name="delete">Delete</string>
     <string name="cancel">Cancel</string>
-    <string name="soldOut">Item sold out</string>
+    <string name="no_more_items">Item sold out</string>
     <string name="empty_text"> </string>
     <string name="empty_text_2"> </string>
 
