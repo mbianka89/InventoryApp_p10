@@ -9,7 +9,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:gravity="center">
 
         <ImageView
             android:id="@+id/item_image"
@@ -130,11 +131,10 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="200dp"
-        android:layout_height="26dp"
+        android:layout_width="91dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:orientation="horizontal"
-        android:weightSum="1">
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/button_minus"
@@ -146,13 +146,13 @@
         <TextView
             android:id="@+id/edit_quantity_text_view"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:hint="0" />
 
         <Button
             android:id="@+id/button_plus"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:onClick="increment"
             android:text="@string/plus" />
     </LinearLayout>
