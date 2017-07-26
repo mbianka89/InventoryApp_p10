@@ -494,6 +494,7 @@ public class EditorActivity extends AppCompatActivity
             byte[] imageBytes = cursor.getBlob(imageColumnIndex);
             Bitmap imageBitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
             mImage.setImageBitmap(imageBitmap);
+            imageUri = Uri.EMPTY;
             ;
 
         }
