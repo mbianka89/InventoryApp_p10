@@ -33,6 +33,7 @@ public class ItemCursorAdapter extends CursorRecyclerAdapter<ItemCursorAdapter.V
         protected TextView quantityTextView;
         protected ImageView buy;
         protected ImageView productPicture;
+        protected TextView supplierTextView;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -41,6 +42,7 @@ public class ItemCursorAdapter extends CursorRecyclerAdapter<ItemCursorAdapter.V
             quantityTextView = (TextView) itemView.findViewById(R.id.list_item_product_quantity);
             buy = (ImageView) itemView.findViewById(R.id.shop);
             productPicture = (ImageView) itemView.findViewById(R.id.list_item_product_image_view);
+            supplierTextView = (TextView) itemView.findViewById(R.id.list_item_supplier_name);
         }
     }
 
@@ -63,9 +65,11 @@ public class ItemCursorAdapter extends CursorRecyclerAdapter<ItemCursorAdapter.V
         int priceColumnIndex = cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_ITEM_PRICE);
         int quantityColumnIndex = cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_ITEM_QUANTITY);
         int imageColumnIndex = cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_ITEM_IMAGE);
+        int supplierColumnIndex = cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_ITEM_SUPPLIER_NAME);
 
         String productName = cursor.getString(nameColumnIndex);
         String productPrice = cursor.getString(priceColumnIndex);
+        String productSupplier = cursor.getString(supplierColumnIndex);
         int quantity = cursor.getInt(quantityColumnIndex);
         byte[] imageBytes = cursor.getBlob(imageColumnIndex);
 
@@ -78,6 +82,7 @@ public class ItemCursorAdapter extends CursorRecyclerAdapter<ItemCursorAdapter.V
         viewHolder.quantityTextView.setText(String.valueOf(quantity));
         viewHolder.productPicture.setImageBitmap(imageBitmap);
         viewHolder.productPicture.invalidate();
+        viewHolder.supplierTextView.setText(productSupplier);
 
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
