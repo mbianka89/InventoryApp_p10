@@ -1,10 +1,12 @@
 package com.example.android.inventoryapp_p10;
 
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.LoaderManager;
@@ -116,6 +118,24 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         mCursorAdapter.swapCursor(null);
+    }
+
+    public void onItemClick(long id) {
+        Intent intent = new Intent(MainActivity.this, EditorActivity.class);
+
+        Uri currentItemUri = ContentUris.withAppendedId(ItemContract.ItemEntry.CONTENT_URI, id);
+        intent.setData(currentItemUri);
+
+        startActivity(intent);
+    }
+
+    public void onShopClick(long id, int quantity) {
+        Uri currentItemUri = ContentUris.withAppendedId(ItemContract.ItemEntry.CONTENT_URI, id);
+        Log.v("MainActivity", "Uri: " + currentItemUri);
+        quantity--;
+        ContentValues values = new ContentValues();
+        values.put(ItemContract.ItemEntry.COLUMN_ITEM_QUANTITY, quantity);
+        int rowsEffected = getContentResolver().update(currentItemUri, values, null, null);
     }
 
     private void insertItem() {
