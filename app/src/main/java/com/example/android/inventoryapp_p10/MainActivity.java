@@ -3,6 +3,8 @@ package com.example.android.inventoryapp_p10;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.LoaderManager;
@@ -18,6 +20,8 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.android.inventoryapp_p10.Data.ItemContract;
+
+import java.io.ByteArrayOutputStream;
 
 public class MainActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor> {
@@ -121,11 +125,26 @@ public class MainActivity extends AppCompatActivity implements
         values.put(ItemContract.ItemEntry.COLUMN_ITEM_PRICE, 120);
         values.put(ItemContract.ItemEntry.COLUMN_ITEM_QUANTITY, 5);
         values.put(ItemContract.ItemEntry.COLUMN_ITEM_SUPPLIER_EMAIL, "bianka@gmail.com");
-        values.put(ItemContract.ItemEntry.COLUMN_ITEM_IMAGE, R.drawable.android_wear);
         values.put(ItemContract.ItemEntry.COLUMN_ITEM_SUPPLIER_NAME, "John Doe");
+
+        BitmapDrawable drawable = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            drawable = (BitmapDrawable) getDrawable(R.drawable.android_wear);
+        }
+        byte[] imageBytes = getBytes(drawable.getBitmap());
+        values.put(ItemContract.ItemEntry.COLUMN_ITEM_IMAGE, imageBytes);
 
         getContentResolver().insert(ItemContract.ItemEntry.CONTENT_URI, values);
     }
+
+    private static byte[] getBytes(Bitmap bitmap) {
+        if (bitmap != null) {
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 0, stream);
+            return stream.toByteArray();
+        } else {
+            return null;
+        }}
 
     private void deleteAllItem() {
         int rowsDeleted = getContentResolver().delete(ItemContract.ItemEntry.CONTENT_URI, null, null);
